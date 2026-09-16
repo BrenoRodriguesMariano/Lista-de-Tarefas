@@ -1,0 +1,156 @@
+/* Reseta estilos padrões do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estrutura global da página */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh; 
+    background-color: #f9f9f9;
+    padding: 40px 20px;
+}
+
+/* Container principal (Título + Caixa de tarefas) */
+.first-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Título principal */
+h1 {
+    color: #333;
+    font-size: 2rem;
+}
+
+/* Caixa interna que envolve o app de tarefas */
+.second-main {
+    position: relative; /* Permite posicionar os avisos de forma absoluta lá embaixo */
+    padding: 20px 20px 80px 20px; /* Padding inferior estendido para os avisos */
+    border: solid 2px #000;
+    border-radius: 8px; 
+    background-color: #fff;
+    width: 100%;
+    min-height: 460px; 
+}
+
+/* Container para alinhar input e botão lado a lado perfeitamente */
+.second-main > div:first-of-type {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+/* Campo de entrada de texto */
+.input-class {
+    flex: 1; /* Ocupa todo o espaço restante disponível */
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.input-class:focus {
+    border-color: #000;
+}
+
+/* Botão de adicionar tarefa */
+button {
+    padding: 8px 16px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+/* Lista de tarefas */
+.to-do-list {
+    list-style-type: disc;
+    list-style-position: inside;
+    margin-top: 10px;
+    padding-left: 0;
+    max-height: 260px;  /* Evita que a lista estoure o tamanho da caixa */
+    overflow-y: auto;   /* Adiciona barra de rolagem apenas vertical se passar de 260px */
+    overflow-x: hidden; /* Remove e bloqueia estritamente qualquer barra ou rolagem horizontal */
+}
+
+/* Item da lista */
+.to-do-list li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #333;
+    list-style-type: disc;
+    display: list-item; /* Mantém a bolinha padrão do navegador */
+}
+
+/* Texto de dentro do item da lista */
+.to-do-list li p {
+    display: inline-block;
+    margin: 0;
+    padding-left: 6px; 
+    word-break: break-all; /* Evita que palavras gigantes quebrem o layout */
+    width: 85%; /* Ajustado para dar espaço seguro aos 50 caracteres */
+    vertical-align: middle;
+}
+
+/* Estilização padrão do botão X (oculto por padrão) */
+.to-do-list li .remove-btn {
+    float: right; /* Empurra o X para a extremidade direita da linha */
+    color: #ff3333;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0; /* Invisível por padrão */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    vertical-align: middle;
+    line-height: 1;
+    margin-right: 5px; /* Evita o transbordo na extremidade da borda do container */
+}
+
+/* Faz o X aparecer quando o mouse passa por cima do item correspondente (li) */
+.to-do-list li:hover .remove-btn {
+    opacity: 1; /* Torna visível */
+}
+
+/* Efeito de zoom leve ao passar o mouse direto no caractere X */
+.to-do-list li .remove-btn:hover {
+    transform: scale(1.2); /* Ajustado para crescer sem causar quebras ou rolagens */
+}
+
+/* Estilização dos avisos de limite no canto inferior esquerdo */
+#limit, #minimum {
+    position: absolute;
+    left: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    max-width: 90%;
+}
+
+/* Alinha o limite de caracteres */
+#limit {
+    bottom: 45px;
+    color: #ff3333;
+}
+
+/* Alinha o limite de 20 tarefas */
+#minimum {
+    bottom: 20px;
+    color: #ff3333;
+}
