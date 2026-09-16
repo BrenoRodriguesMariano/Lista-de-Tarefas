@@ -16,12 +16,12 @@ function atualizarPlaceholder() {
     }
 }
 
-// Valida os caracteres em tempo real enquanto o usuário digita (limite alterado para 50)
+// Valida os caracteres em tempo real enquanto o usuário digita (limite de 50)
 inputTarefa.addEventListener('input', () => {
     if (inputTarefa.value.length > 50) {
         pLimit.textContent = "Aviso: O limite máximo é de 50 caracteres!";
     } else {
-        pLimit.textContent = "";
+        pLimit.textContent = ""; // Limpa se estiver dentro do limite
     }
 });
 
@@ -30,14 +30,15 @@ function adicionarTarefa() {
     const textoTarefa = inputTarefa.value.trim();
     const totalTarefas = listaTarefas.querySelectorAll('li').length;
 
-    // Bloqueia a inserção se o usuário já tiver atingido o limite de 20 tarefas
-    if (totalTarefas >= 20) {
-        pMinimum.textContent = "Aviso: Você atingiu o limite máximo de 20 tarefas!";
+    // Erro 1: Se o cara tentar clicar em adicionar puramente (vazio)
+    if (textoTarefa === "") {
+        pLimit.textContent = "Aviso: Adicione uma tarefa";
         return;
     }
 
-    // Impede a adição se o input estiver vazio
-    if (textoTarefa === "") {
+    // Bloqueia a inserção se o usuário já tiver atingido o limite de 20 tarefas
+    if (totalTarefas >= 20) {
+        pMinimum.textContent = "Aviso: Você atingiu o limite máximo de 20 tarefas!";
         return;
     }
 
@@ -56,16 +57,16 @@ function adicionarTarefa() {
     // Cria o botão X de remoção
     const botaoRemover = document.createElement('span');
     botaoRemover.className = 'remove-btn';
-    botaoRemover.innerHTML = '&times;'; // Gera o caractere "×" de multiplicação
+    botaoRemover.innerHTML = '&times;'; // Gera o caractere "×"
 
     // Adiciona o evento para remover a tarefa ao clicar no X
     botaoRemover.addEventListener('click', () => {
         novoItem.remove();
         
-        // Verifica a quantidade atual de itens para gerenciar o aviso
+        // Verifica a quantidade atual de itens para gerenciar o aviso de 20 itens
         const tarefasRestantes = listaTarefas.querySelectorAll('li').length;
         if (tarefasRestantes < 20) {
-            pMinimum.textContent = ""; // Limpa o aviso caso caia abaixo de 20
+            pMinimum.textContent = ""; 
         }
         
         atualizarPlaceholder();
@@ -78,7 +79,7 @@ function adicionarTarefa() {
     // Adiciona o item completo à sua lista <ul>
     listaTarefas.appendChild(novoItem);
 
-    // Limpa o campo de entrada e reseta o aviso de limite de caracteres
+    // Limpa o campo de entrada e reseta o aviso de erro/caracteres
     inputTarefa.value = "";
     pLimit.textContent = "";
 
